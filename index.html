@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Uploader</title>
+		<meta name = "encoding" value = "UTF-8" />
+		
+		<!-- INCLUDE THE UPLOADER.JS SCRIPT -->
+		<script type = "text/javascript" src = "uploader.js"></script>
+	</head>
+	
+	<!-- Setup function called to create the progress bar (optional) -->
+	<body onLoad = "Setup();">
+		<h1>Uploader</h1>
+		<p>This is an example of Uploader.</p>
+		
+		<br /><hr /><br />
+		
+		<!-- ADD A FILE INPUT AND A BUTTON, WHICH CALLS UPER.UploadFileFromSelector(tag_id); -->
+		<input type = "file" id = "file_selector" />
+		<button onClick = "UPER.UploadFileFromSelector('file_selector');">Upload</button>
+		
+		<div style = "margin:16px;"></div>
+		
+		<!-- Create a progress bar  (optional) -->
+		<div style = "width:80%;height:26px;border-style:solid;">
+			<div id = "progress_bar"></div>
+		</div>
+		
+		<h2 id = "info"></h2>
+		
+		<br /><hr />
+		
+		<script type = "text/javascript">
+			function Setup() {	// Called when the document has loaded
+				UPER.SetProgressListener(function(uper){
+					
+					var progress_bar = document.getElementById("progress_bar");
+					var bar_style = "height:26px;background-color:#0000EE;width:" + uper.progress.toString() + "%";
+					
+					progress_bar.setAttribute("style", bar_style);
+					
+					if (uper.progress == 100) {	// Upload finished
+						var info = document.getElementById("info");
+						info.setAttribute("style", "color:#00DD00;");
+						info.innerHTML = "File upload compleate.";
+					}
+					
+					if (uper.upload_error) {
+						var info = document.getElementById("info");
+						info.setAttribute("style", "color:#DD0000;");
+						info.innerHTML = "Error uploading file!";
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
