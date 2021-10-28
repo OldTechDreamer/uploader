@@ -66,7 +66,7 @@ class Uploader {
 		var self = this;
 		
 		// Set the progress and call the listener
-		this.progress = Math.ceil((this.index / this.file.size) * 100);
+		this.progress = (this.index / this.file.size) * 100;
 		
 		if (this.progress > 100) {					// Upload finished
 			this.progress = 100;
